@@ -4,9 +4,8 @@ Autor:        Fernando J. Muñoz
 Descripción:  Establecer un estándar en el desarrollo de Ruby on Rails
 Fecha inicio: 5/11/2014  
 
----
 ##Fecha:        5/11/2014
-###Objetivo:  
+###Objetivos:  
 1. Crea aplicación 
 2. Subirla a GitHub
 3. Subirla a Heroku
@@ -84,7 +83,6 @@ annotate --routes
 git init
 git add -A
 git commit -m "Commit inicial"
-git status
 ```
 
 - Subimos las modificaciones a GitHub
