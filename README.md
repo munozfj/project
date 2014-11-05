@@ -1,7 +1,7 @@
 # Project  
 
 Autor:        Fernando J. Muñoz  
-Descripción:  Establecer un estándar en el desarrollo de Ruby on Rails
+Descripción:  Establecer un estándar en el desarrollo de Ruby on Rails   
 Fecha inicio: 5/11/2014  
 
 ##Fecha:        5/11/2014
@@ -15,7 +15,7 @@ Fecha inicio: 5/11/2014
 - rails _ 4.2.0.beta4 _ new project  
 - cd project  
 - mv README.rdoc README.md  
-- modificar Gemfile
+- modificar Gemfile   
 ```sh
 source 'https://rubygems.org'
 
@@ -61,39 +61,28 @@ gem 'sdoc', '~> 0.4.1', group: :doc
 
 ``` 
 
-- bundle install --without production
-
-- Instalar annotate con:
-
+- bundle install --without production    
+- Instalar annotate con:   
 ```sh
 rails g annotate:install
-```
-
-- Para guardar también las rutas hacer
-
+```    
+- Para guardar también las rutas hacer    
 ```sh
 annotate --routes
-```
-
-- Ir a GitHub y crear ahi un repositorio con el mismo nombre de la aplicación
-
-- Comenzamos a registrar los cambios con GIT
-
+```    
+- Ir a GitHub y crear ahi un repositorio con el mismo nombre de la aplicación      
+- Comenzamos a registrar los cambios con GIT   
 ```sh
 git init
 git add -A
 git commit -m "Commit inicial"
-```
-
-- Subimos las modificaciones a GitHub
-
+```     
+- Subimos las modificaciones a GitHub   
 ```sh
 git remote add origin git@github.com:munozfj/project.git
 git push -u origin master
-```
-
-- Publicar en Heroku
-
+```    
+- Publicar en Heroku   
 ```sh
 RAILS_ENV=production rake assets:precompile
 heroku create
@@ -102,5 +91,5 @@ heroku config:set SECRET_KEY_BASE=`ruby -rsecurerandom -e "puts SecureRandom.hex
 heroku apps:rename project
 heroku logs
 heroku open
-```
+```    
 
