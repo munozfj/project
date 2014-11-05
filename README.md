@@ -138,6 +138,23 @@ git status
 git add -A
 git commit -m "Paginas estaticas"
 ```    
-- Subir los cambios a GitHub   
+- Coloco los cambios de la rama en MASTER
+```sh
+git co master
+git branch
+git merge <nombre rama aux>
+```    
+- Subir los cambios a GitHub  
+```sh
+git push
+```     
 - Subir los cambios a Heroku  
+```sh
+git push heroku
+```    
+- La rama auxiliar se podria eliminar
+```sh
+git branch
+git -d <nombre rama aux>
+```    
 
