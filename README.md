@@ -4,7 +4,7 @@ Autor:        Fernando J. Muñoz
 Descripción:  Establecer un estándar en el desarrollo de Ruby on Rails   
 Fecha inicio: 5/11/2014  
 
-##Fecha:        5/11/2014
+##Fecha: 5/11/2014
 ###Objetivos:  
 1. Crea aplicación 
 2. Subirla a GitHub
@@ -94,4 +94,50 @@ heroku apps:rename project
 heroku logs
 heroku open
 ```    
+
+##Fecha: 5/11/2014
+###Objetivos:  
+1. Crear páginas estáticas
+2. Establecer Root
+3. Crear rutas con nombre
+
+###Pasos:  
+- Creo una nueva rama de desarrollo   
+```sh
+git co -b pag-estaticas    
+``` 
+- Crear las paginas estaticas 
+```sh
+rails g controller Static home contact about help forum     
+```    
+- Modificar el archivo /config/routes.rb para que tenga pagina root  
+```sh
+root 'static#home'    
+```    
+- Crear nombres para las paginas estaticas     
+```sh
+get '/contact', to: 'static#contact', as: 'contact'
+get '/about', to: 'static#about', as: 'about'
+get '/help', to: 'static#help', as: 'help'
+get '/forum', to: 'static#forum', as: 'form'
+```    
+- Reiniciar el servidor web para que tome los cambios realizados  
+- Registrar en routes.rb las nuevas rutas  
+```sh
+annotate --routes
+```    
+- Para ver los nombres de las rutas hacer  
+```sh
+rake routes
+```    
+- Modificar levemente las vistas de las paginas estáticas   
+- Confirmar cambios en la rama  
+```sh
+git branch
+git status
+git add -A
+git commit -m "Paginas estaticas"
+```    
+- Subir los cambios a GitHub   
+- Subir los cambios a Heroku  
 
