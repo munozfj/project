@@ -11,11 +11,13 @@ Fecha inicio: 5/11/2014
 3. Subirla a Heroku
 
 ###Pasos:
-
-- rails _ 4.2.0.beta4 _ new project  
+- Crear aplicación con:  
+```sh
+rails _4.2.0.beta4_ new project      
+```   
 - cd project  
 - mv README.rdoc README.md  
-- modificar Gemfile   
+- Modificar el archivo Gemfile   
 ```sh   
 source 'https://rubygems.org'
 
