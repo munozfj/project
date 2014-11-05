@@ -116,10 +116,10 @@ root 'static#home'
 ```    
 - Crear nombres para las paginas estaticas     
 ```sh
-get '/contact', to: 'static#contact', as: 'contact'
-get '/about', to: 'static#about', as: 'about'
-get '/help', to: 'static#help', as: 'help'
-get '/forum', to: 'static#forum', as: 'form'
+get 'contact', to: 'static#contact', as: 'contact'
+get 'about', to: 'static#about', as: 'about'
+get 'help', to: 'static#help', as: 'help'
+get 'forum', to: 'static#forum', as: 'form'
 ```    
 - Reiniciar el servidor web para que tome los cambios realizados  
 - Registrar en routes.rb las nuevas rutas  
@@ -151,6 +151,7 @@ git push
 - Subir los cambios a Heroku  
 ```sh
 git push heroku
+heroku open  
 ```    
 - La rama auxiliar se podria eliminar
 ```sh
