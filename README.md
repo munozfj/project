@@ -16,7 +16,7 @@ Fecha inicio: 5/11/2014
 - cd project  
 - mv README.rdoc README.md  
 - modificar Gemfile   
-```sh
+```sh   
 source 'https://rubygems.org'
 
 
@@ -56,12 +56,12 @@ group :production do
   gem 'rails_12factor', '~> 0.0.3'
 end
 
-# bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.1', group: :doc
-
-``` 
-
-- bundle install --without production    
+```   
+- Instalar gemas:  
+```sh
+bundle install --without production    
+```   
 - Instalar annotate con:   
 ```sh
 rails g annotate:install
