@@ -159,3 +159,59 @@ git branch
 git -d <nombre rama aux>
 ```    
 
+##Fecha: 6/11/2014
+###Objetivos:  
+1. Crear un título para las paginas de la aplicación
+
+###Pasos:  
+- Creo una nueva rama de desarrollo   
+```sh
+git co -b titulo  
+``` 
+- Crear un helper /helpers/application_helper.rb que armará el titulo para todas las paginas
+```sh
+def full_title(page_title=nil)
+    base_title = "My Project"
+    if page_title
+      content_for(:title) { "#{page_title} | #{base_title}" }
+    else
+      content_for?(:title) ? content_for(:title) : base_title
+    end
+end  
+```    
+- Modificar el layout de la aplicación para que utilice dicho helper  
+```sh
+<title><%= full_title %></title>   
+```    
+- Modificar todas las vistas que sean necesarias para que muestren su titulo 
+```sh
+<% full_title 'About Us' %>    
+```    
+- Confirmar cambios en la rama  
+```sh
+git branch
+git status
+git add -A
+git commit -m "Titulo general"
+```    
+- Coloco los cambios de la rama en MASTER
+```sh
+git co master
+git branch
+git merge <nombre rama aux>
+```    
+- Subir los cambios a GitHub  
+```sh
+git push
+```     
+- Subir los cambios a Heroku  
+```sh
+git push heroku
+heroku open  
+```    
+- La rama auxiliar se podria eliminar
+```sh
+git branch
+git -d <nombre rama aux>
+```    
+
