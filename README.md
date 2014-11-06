@@ -206,7 +206,7 @@ git push
 ```     
 - Subir los cambios a Heroku  
 ```sh
-RAILS_ENV=production rake assets:precompile
+RAILS_ENV=production rake assets:precompile 
 git push heroku
 heroku open  
 ```    
