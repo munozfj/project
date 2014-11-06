@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'contact', to: 'static#contact', as: 'contact'
   get 'about', to: 'static#about', as: 'about'
   get 'help', to: 'static#help', as: 'help'
-  get 'forum', to: 'static#forum', as: 'form'
+  get 'forum', to: 'static#forum', as: 'forum'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -214,4 +214,127 @@ heroku open
 git branch
 git -d <nombre rama aux>
 ```    
+##Fecha: 6/11/2014
+###Objetivos:  
+1. Modificar el layout de la aplicacion con rails_layout
+2. Utilizar Bootstrap
 
+###Pasos:  
+- Creo una nueva rama de desarrollo   
+```sh
+git co -b layout  
+``` 
+- Para modificar el layout de la aplicación para que use Bootstrap3   
+```sh
+rails generate layout:install bootstrap3 --force 
+``` 
+- Como se va a utilizar autenticacion por devise, genero el navigation para eso  
+```sh
+rails generate layout:navigation --force 
+``` 
+- Modificar el archivo _navigation_links.html.erb   
+```sh
+<%# add navigation links to this file %>
+<li><%= link_to 'Home', root_path %></li>
+<li><%= link_to 'About', about_path %></li>
+<li><%= link_to 'Contact', contact_path %></li>
+<li><%= link_to 'Forum', forum_path %></li>
+``` 
+- Crear /views/layouts el partial footer  
+```sh
+<!-- Footer -->
+<hr>
+<footer>
+<small>FM &copy; Company <%= Time.now.year %></small>
+</footer>
+``` 
+- Crear /views/layouts el partial _favicon.html.erb  
+```sh
+<!-- https://www.iconfinder.com -->
+<!-- https://www.iconfinder.com/icons/85827/scale_weight_icon#size=30 -->
+<!-- Favicon tradicional -->
+<%= favicon_link_tag 'app.png', rel: 'shortcut icon' , type: 'image/png'%>
+<!-- Favincon para Appel y Android -->
+<%= favicon_link_tag 'app-60.png', rel: 'apple-touch-icon', type: 'image/png' , size:'60x60' %>
+<%= favicon_link_tag 'app-72.png', rel: 'apple-touch-icon', type: 'image/png' , size:'72x72' %>
+<%= favicon_link_tag 'app-120.png', rel: 'apple-touch-icon', type: 'image/png' , size:'120x120' %>
+<%= favicon_link_tag 'app-152.png', rel: 'apple-touch-icon', type: 'image/png' , size:'152x152' %>
+<%= favicon_link_tag 'app.png', rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
+``` 
+- Crear /views/layouts el partial _metas.html.erb  
+```sh
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RoR Project">
+<meta name="author" content="Fernando J. Muñoz">
+``` 
+- Crear /views/layouts el partial _shim.html.erb  
+```sh
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+``` 
+- Colocar los iconos de la aplicación en /assets/images  
+- Modificar el layo de la aplicación para que contenga los partials anteiores
+```sh
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%= render 'layouts/metas' %>
+    <%= render 'layouts/favicon' %>
+
+    <title><%= full_title %></title>
+  
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main class="container theme-showcase" role="main">
+      <div class="jumbotron">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+    </main>
+    <%= render 'layouts/footer' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
+</html>
+``` 
+- En caso de desearse un tema de Bootwatch, crear en /assets/stylesheets el archivo bootwatch.css.scss con toda la configuracion del tema elegido  
+- Para los estilos propios de la aplicacion, crear en /assets/stylesheets el archivo custom.css.scss 
+
+- Confirmar cambios en la rama  
+```sh
+git branch
+git status
+git add -A
+git commit -m "Layout"
+```    
+- Coloco los cambios de la rama en MASTER
+```sh
+git co master
+git branch
+git merge <nombre rama aux>
+```    
+- Subir los cambios a GitHub  
+```sh
+git push
+```     
+- Subir los cambios a Heroku  
+```sh
+git push heroku
+heroku open  
+```    
+- La rama auxiliar se podria eliminar
+```sh
+git branch
+git -d <nombre rama aux>
+```    

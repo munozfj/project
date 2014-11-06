@@ -1,14 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title><%= full_title %></title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en" dir="ltr">
+  <head>
+    <%= render 'layouts/metas' %>
+    <%= render 'layouts/favicon' %>
 
-<%= yield %>
+    <title><%= full_title %></title>
+  
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
 
-</body>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main class="container theme-showcase" role="main">
+      <div class="jumbotron">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+    </main>
+    <%= render 'layouts/footer' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
 </html>
