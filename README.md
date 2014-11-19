@@ -428,6 +428,7 @@ git push
 ```sh
 RAILS_ENV=production rake assets:precompile 
 git push heroku
+heroku run rake db:migrate
 heroku open  
 ```    
 - La rama auxiliar se podria eliminar
