@@ -340,3 +340,98 @@ heroku open
 git branch
 git -d <nombre rama aux>
 ```    
+
+##Fecha: 19/11/2014
+###Objetivos:  
+1. Implementar Devise para la autenticación
+
+###Pasos:  
+- Creo una nueva rama de desarrollo   
+```sh
+git co -b devise  
+``` 
+- En el archivo Gemfile agrego la gema de deivse  
+```sh
+#Autenticacion
+gem 'devise', '~> 3.4.1'
+``` 
+- Instalar la gema con   
+```sh
+bundle install
+``` 
+- Para instalar Devise ejecutar lo siguiente  
+```sh
+rails g devise:install
+rails g devise User
+rake db:migrate
+annotate --routes
+``` 
+- rails s  
+- Verificar las condiciones necesarias para Devise  
+```sh
+* En el archivo /environments/development.rb debe existir la linea para el mail
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+* Tiene que estar definida una pagina root
+* El layout debe mostrar los mensajes flash
+``` 
+- Agregar en el layout los links a las pantallas creadas por Devise 
+```sh
+<ul class="nav navbar-nav navbar-right">
+  <% if user_signed_in? %>
+    <li><%= link_to current_user.email , edit_user_registration_path %></li>
+    <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <% else %>
+    <li><%= link_to 'Sign in', new_user_session_path %></li>
+    <li><%= link_to 'Sign up', new_user_registration_path %></li>
+  <% end %>
+
+</ul>
+``` 
+- En la pagina home agregar el boton para ingresar a la aplicación 
+```sh
+<%= link_to "Sign up &raquo;".html_safe, new_user_session_path, class: "btn btn-primary btn-lg"  %>
+``` 
+- Modificar también en el archivo initializers/devise.rb  
+```sh
+config.mailer_sender = 'no-replay@rails-project.com'
+``` 
+- Modificar las vistas de Devise haciendo  
+```sh
+rails g devise:views
+rails generate layout:devise bootstrap3
+``` 
+- Modificar las vistas para que todas tengan el look and feel correspondiente y el título de la páginas  
+- Para restringir el acceso a las distintas paginas usar en los controladores  
+```sh
+before_filter :authenticate_user!, except: [:metodo1, :metodo2]
+o
+before_filter :authenticate_user!, only: [:metodo1, :metodo2]
+``` 
+- Confirmar cambios en la rama  
+```sh
+git branch
+git status
+git add -A
+git commit -m "Layout"
+```    
+- Coloco los cambios de la rama en MASTER
+```sh
+git co master
+git branch
+git merge <nombre rama aux>
+```    
+- Subir los cambios a GitHub  
+```sh
+git push
+```     
+- Subir los cambios a Heroku  
+```sh
+RAILS_ENV=production rake assets:precompile 
+git push heroku
+heroku open  
+```    
+- La rama auxiliar se podria eliminar
+```sh
+git branch
+git -d <nombre rama aux>
+```    

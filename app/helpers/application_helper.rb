@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title=nil)
-    base_title = "My Project"
+    base_title = "My Rails Project"
     if page_title
       content_for(:title) { "#{page_title} | #{base_title}" }
     else

@@ -17,6 +17,9 @@ gem 'bootstrap-sass', '~> 3.3.0.1'
 gem 'will_paginate', '~> 3.0.7'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 
+#Autenticacion
+gem 'devise', '~> 3.4.1'
+
 group :development do
   gem 'annotate', '~> 2.6.5'
   gem 'better_errors', '~> 2.0.0'
