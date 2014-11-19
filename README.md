@@ -412,7 +412,7 @@ before_filter :authenticate_user!, only: [:metodo1, :metodo2]
 git branch
 git status
 git add -A
-git commit -m "Layout"
+git commit -m "Devise"
 ```    
 - Coloco los cambios de la rama en MASTER
 ```sh
