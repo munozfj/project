@@ -25,7 +25,10 @@
 
 Rails.application.routes.draw do
 
-  devise_for :users
+
+  resources :dummies
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
   get 'contact', to: 'static#contact', as: 'contact'
   get 'about',   to: 'static#about',   as: 'about'
   get 'help',    to: 'static#help',    as: 'help'

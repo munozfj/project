@@ -16,6 +16,8 @@
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" ,class: 'form-control'%>
+    <div id="passstrength"></div>
+
   </div>
 
   <div class="form-group">
@@ -23,9 +25,48 @@
     <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control' %>
   </div>
 
+  <%= raw recaptcha_tags %>
+
   <div class="actions">
     <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
+<% content_for :head_recaptcha do %>
+  <script>
+    var RecaptchaOptions = {
+      theme : 'clean'
+    };
+  </script>
+<% end %>
+
+<% content_for :foot_pass_strength do %>
+  <script >
+$('#user_password').keyup(function(e) {
+     var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+     var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+     var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+     if (false == enoughRegex.test($(this).val())) {
+             $('#passstrength').html('More Characters');
+             $('#passstrength').css('color', 'red');
+     } else if (strongRegex.test($(this).val())) {
+             $('#passstrength').className = 'ok';
+             $('#passstrength').html('Strong!');
+             $('#passstrength').css('color', 'green');
+     } else if (mediumRegex.test($(this).val())) {
+             $('#passstrength').className = 'alert';
+             $('#passstrength').html('Medium!');
+             $('#passstrength').css('color', 'blue');
+     } else {
+             $('#passstrength').className = 'error';
+             $('#passstrength').html('Weak!');
+             $('#passstrength').css('color', 'orange');
+     }
+     return true;
+});
+
+ </script>
+<% end %>

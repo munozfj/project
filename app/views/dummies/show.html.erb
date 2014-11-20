@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dummy.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @dummy.address %>
+</p>
+
+<%= link_to 'Edit', edit_dummy_path(@dummy) %> |
+<%= link_to 'Back', dummies_path %>

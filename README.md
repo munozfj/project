@@ -436,3 +436,141 @@ heroku open
 git branch
 git -d <nombre rama aux>
 ```    
+
+##Fecha: 19/11/2014
+###Objetivos:  
+1. Implementar password strength
+2. Implementar Google Recaptcha
+###Fuentes:
+1. https://github.com/plataformatec/devise/wiki/How-To:-Use-Recaptcha-with-Devise
+2. http://www.tweetegy.com/2012/10/setting-up-a-captcha-with-recaptcha-service-and-the-captcha-gem/
+3. https://developers.google.com/recaptcha/docs/customization
+4. http://www.sitepoint.com/5-bootstrap-password-strength-metercomplexity-demos/
+
+###Pasos:  
+- Creo una nueva rama de desarrollo   
+```sh
+git co -b strength   
+``` 
+- Agregar en el archivo Gemfile la gema   
+```sh
+gem "recaptcha", :require => "recaptcha/rails" 
+``` 
+- Configur Google Recaptcha para el ambiente y la aplicacion en
+```sh
+https://www.google.com/recaptcha/intro/index.html
+``` 
+- Se obtendra dos variables RECAPTCHA_PUBLIC_KEY y RECAPTCHA_PRIVATE_KEY  
+- Colocar ambas en el archivo /config/secrets  para todos los ambientes   
+- En la vista que se quiere tener el captcha colocar  
+```sh
+<%= raw recaptcha_tags %>
+``` 
+- Para modificar los controladores de Devise hacer
+```sh
+rails g devise:controllers users
+``` 
+- Modificar el controlador registrations correspondientes para que tenga encuenta la validez del captcha a la hora de insertar el nuevo dato en la base de datos    
+```sh
+if verify_recaptcha
+  super
+else
+  build_resource(sign_up_params)
+  clean_up_passwords(resource)
+  flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."      
+  flash.delete :recaptcha_error
+  render :new
+end
+``` 
+- Modificar routes.rb para que tome el controlador modificado  
+```sh
+devise_for :users, controllers: { registrations: "users/registrations" }
+``` 
+- Para modificar el theme del captcha en la vista de la pantalla modificada agregar  
+```sh
+<% content_for :head_recaptcha do %>
+  <script>
+    var RecaptchaOptions = {
+      theme : 'clean'
+    };
+  </script>
+<% end %>
+``` 
+- Para que dicho javascript aparezca con esta pantalla agregar en el layout de la aplicacion   
+```sh
+<%= yield :head_recaptcha %>
+``` 
+- Para la validacion de la password agregar debajo del campo password 
+```sh
+<div id="passstrength"></div>
+``` 
+- Tambien agregar el siguiente javascript  
+```sh
+<% content_for :foot_pass_strength do %>
+  <script >
+$('#user_password').keyup(function(e) {
+     var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+     var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+     var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+     if (false == enoughRegex.test($(this).val())) {
+             $('#passstrength').html('More Characters');
+             $('#passstrength').css('color', 'red');
+     } else if (strongRegex.test($(this).val())) {
+             $('#passstrength').className = 'ok';
+             $('#passstrength').html('Strong!');
+             $('#passstrength').css('color', 'green');
+     } else if (mediumRegex.test($(this).val())) {
+             $('#passstrength').className = 'alert';
+             $('#passstrength').html('Medium!');
+             $('#passstrength').css('color', 'blue');
+     } else {
+             $('#passstrength').className = 'error';
+             $('#passstrength').html('Weak!');
+             $('#passstrength').css('color', 'orange');
+     }
+     return true;
+});
+
+ </script>
+<% end %>
+``` 
+- Para que dicho javascript aparezca con esta pantalla agregar en el layout de la aplicacion   
+```sh
+<%= yield :foot_pass_strength %>
+``` 
+- Dar formato al texto  
+```sh
+#passstrength 
+{
+  font-weight:bold;
+}
+``` 
+- Confirmar cambios en la rama  
+```sh
+RAILS_ENV=production rake assets:precompile 
+git branch
+git status
+git add -A
+git commit -m "Strength"
+```    
+- Coloco los cambios de la rama en MASTER
+```sh
+git co master
+git branch
+git merge <nombre rama aux>
+```    
+- Subir los cambios a GitHub  
+```sh
+git push
+```     
+- Subir los cambios a Heroku  
+```sh
+git push heroku
+heroku run rake db:migrate
+heroku open  
+```    
+- La rama auxiliar se podria eliminar
+```sh
+git branch
+git -d <nombre rama aux>
+```    

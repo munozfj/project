@@ -20,6 +20,9 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 #Autenticacion
 gem 'devise', '~> 3.4.1'
 
+#Captcha
+gem "recaptcha", :require => "recaptcha/rails"
+
 group :development do
   gem 'annotate', '~> 2.6.5'
   gem 'better_errors', '~> 2.0.0'
