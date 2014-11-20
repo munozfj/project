@@ -567,6 +567,8 @@ git push
 ```sh
 git push heroku
 heroku run rake db:migrate
+heroku config:set RECAPTCHA_PUBLIC_KEY="xxx"
+heroku config:set RECAPTCHA_PRIVATE_KEY="xxx"
 heroku open  
 ```    
 - La rama auxiliar se podria eliminar
